@@ -29,14 +29,6 @@ class App extends Component {
         }
     }
 
-    s4() {
-        return  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    }
-
-    guid() {
-        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
-    }
-
     findIndex = (id) => {
         var { tasks } = this.state;
         var result = -1;
@@ -174,7 +166,6 @@ class App extends Component {
             });
         }
         var elmForm = isDisplayForm === true ? <TaskForm
-                                                    onSave={this.onSave}
                                                     onExitForm={this.onExitForm}
                                                     itemEditing={ itemEditing }
                                                     /> : '';

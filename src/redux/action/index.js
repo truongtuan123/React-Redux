@@ -1,7 +1,14 @@
 import * as type from '../constant/index';
 
-export default getAll = () => {
+export const getAll = () => {
     return {
         type: type.GET_ALL
+    }
+}
+
+export const addTodo = (task) => {
+    return {
+        type: type.ADD_TODO,
+        task
     }
 }
