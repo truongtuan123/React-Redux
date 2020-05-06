@@ -71,16 +71,16 @@ class App extends Component {
         this.props.onToggleForm();
     }
 
-    onDeleteTask = (id) => {
-        var { tasks } = this.state;
-        var index = this.findIndex(id);
-        tasks.splice(index, 1);
-        this.setState({
-            tasks : tasks
-        });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        this.onExitForm();
-    }
+    // onDeleteTask = (id) => {
+    //     var { tasks } = this.state;
+    //     var index = this.findIndex(id);
+    //     tasks.splice(index, 1);
+    //     this.setState({
+    //         tasks : tasks
+    //     });
+    //     localStorage.setItem('tasks', JSON.stringify(tasks));
+    //     this.onExitForm();
+    // }
 
     onSearch = (keyword) => {
         this.setState({
@@ -175,7 +175,6 @@ class App extends Component {
                             sortValue={sortValue}
                         />
                         <TaskList
-                            onDeleteTask={this.onDeleteTask}
                             filterName={filterName}
                             filterStatus={filterStatus}
                             onFilter={this.onFilter}

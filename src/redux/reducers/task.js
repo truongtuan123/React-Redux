@@ -20,12 +20,16 @@ var myReducers = (state = initialState, action) => {
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state]
         case type.UPDATE_STATUS:
-            var index = utils.findIndex(state, action.id);
-            state[index] = {
-                ...state[index],
-                status: !state[index].status
+            var indexOfUpdated = utils.findIndex(state, action.id);
+            state[indexOfUpdated] = {
+                ...state[indexOfUpdated],
+                status: !state[indexOfUpdated].status
             }
-            console.log(state);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state]
+        case type.DELETE_TODO:
+            var indexOfDeleted = utils.findIndex(state, action.id);
+            state.splice(indexOfDeleted , 1);
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state]
         default: 

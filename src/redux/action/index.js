@@ -37,3 +37,10 @@ export const updateStatus = (id) => {
         id
     }
 }
+
+export const deleteTodo = (id) => {
+    return {
+        type: type.DELETE_TODO,
+        id
+    }
+}
