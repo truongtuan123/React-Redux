@@ -1,28 +1,33 @@
 import * as type from '../constant/index';
+import * as utils from '../../common/utils'
 
-const initialState = [];
 
-var s4 = () => {
-    return  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
+var data = JSON.parse(localStorage.getItem('tasks'));
+const initialState = data ? data : [];
 
-var randomId = () => {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}
 
 var myReducers = (state = initialState, action) => {
     switch( action.type ) {
         case type.GET_ALL:
             return state
         case type.ADD_TODO:
-            return [
-                ...state,
-                {
-                    id: randomId(),
-                    name: action.task.name,
-                    status: action.task.status === 'true' ? true : false
-                }
-            ]
+            var newTask = {
+                id: utils.randomId(),
+                name: action.task.name,
+                status: action.task.status === 'true' ? true : false
+            };
+            state.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state]
+        case type.UPDATE_STATUS:
+            var index = utils.findIndex(state, action.id);
+            state[index] = {
+                ...state[index],
+                status: !state[index].status
+            }
+            console.log(state);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state]
         default: 
             return state
     }

@@ -41,31 +41,31 @@ class App extends Component {
         return result;
     }
 
-    onUpdateStatus = (id) => {
-        var tasks = this.state.tasks;
-        var index = this.findIndex(id);
-        tasks[index].status = !tasks[index].status;
-        this.setState({
-            tasks : tasks
-        });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+    // onUpdateStatus = (id) => {
+    //     var tasks = this.state.tasks;
+    //     var index = this.findIndex(id);
+    //     tasks[index].status = !tasks[index].status;
+    //     this.setState({
+    //         tasks : tasks
+    //     });
+    //     localStorage.setItem('tasks', JSON.stringify(tasks));
+    // }
 
-    onSave = (data) => {
-        var tasks = this.state.tasks;
-        data.status = data.status === 'true' ? true : false;
-        if(data.id === ''){
-            data.id = this.guid();
-            tasks.push(data);
-        }else{
-            var index = this.findIndex(data.id);
-            tasks[index] = data;
-        }
-        this.setState({
-            tasks : tasks
-        });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+    // onSave = (data) => {
+    //     var tasks = this.state.tasks;
+    //     data.status = data.status === 'true' ? true : false;
+    //     if(data.id === ''){
+    //         data.id = this.guid();
+    //         tasks.push(data);
+    //     }else{
+    //         var index = this.findIndex(data.id);
+    //         tasks[index] = data;
+    //     }
+    //     this.setState({
+    //         tasks : tasks
+    //     });
+    //     localStorage.setItem('tasks', JSON.stringify(tasks));
+    // }
 
     onToggleForm = () => {
         this.props.onToggleForm();
@@ -175,7 +175,6 @@ class App extends Component {
                             sortValue={sortValue}
                         />
                         <TaskList
-                            onUpdateStatus={this.onUpdateStatus}
                             onDeleteTask={this.onDeleteTask}
                             filterName={filterName}
                             filterStatus={filterStatus}
