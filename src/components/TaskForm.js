@@ -58,7 +58,7 @@ class TaskForm extends Component {
     }
 
     onExitForm = () => {
-        this.props.onExitForm();
+        this.props.onCloseForm();
     }
 
     render() {
@@ -118,7 +118,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddTask: (task) => dispatch(action.addTodo(task))
+        onAddTask: (task) => dispatch(action.addTodo(task)),
+        onCloseForm: () => dispatch(action.closeForm())
     }
 }
 
