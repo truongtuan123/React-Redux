@@ -51,3 +51,10 @@ export const updateTask = (task) => {
         task
     }
 }
+
+export const filterTable = (filter) => {
+    return {
+        type: type.FILTER_TABLE,
+        filter
+    }
+}

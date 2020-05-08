@@ -11,9 +11,6 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            keyword: '',
-            filterName: '',
-            filterStatus: '-1',
             sortBy: 'name',
             sortValue: 1
         };
@@ -96,13 +93,6 @@ class App extends Component {
         });
     }
 
-    onFilter = (filterName, filterStatus) => {
-        this.setState({
-            filterName: filterName,
-            filterStatus: filterStatus
-        });
-    }
-
     onSort = (sortBy, sortValue) => {
         this.setState({
             sortBy: sortBy,
@@ -113,33 +103,12 @@ class App extends Component {
     render() {
         var {
             tasks,
-            keyword, filterName,
-            filterStatus,
-            itemEditing,
             sortBy,
             sortValue
         } = this.state;
 
-        var { isDisplayForm } = this.props;
+        var { isDisplayForm, itemEditing } = this.props;
 
-        tasks = tasks.filter((task) => {
-            return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
-        });
-
-        if (filterName) {
-            tasks = tasks.filter((task) => {
-                return task.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-            });
-        }
-        if (filterStatus) {
-            tasks = tasks.filter((task) => {
-                if (filterStatus === '-1' || filterStatus === -1) {
-                    return task;
-                } else {
-                    return task.status === (parseInt(filterStatus, 10) === 1 ? true : false);
-                }
-            });
-        }
         if (sortBy === 'name') {
             tasks.sort((a, b) => {
                 if (a.name > b.name) return sortValue;
@@ -175,11 +144,7 @@ class App extends Component {
                             sortBy={sortBy}
                             sortValue={sortValue}
                         />
-                        <TaskList
-                            filterName={filterName}
-                            filterStatus={filterStatus}
-                            onFilter={this.onFilter}
-                        />
+                        <TaskList />
                     </div>
                 </div>
             </div>
