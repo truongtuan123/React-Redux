@@ -7,16 +7,22 @@ const initialState = data ? data : [];
 
 
 var myReducers = (state = initialState, action) => {
-    switch( action.type ) {
+    switch (action.type) {
         case type.GET_ALL:
             return state
-        case type.ADD_TODO:
-            var newTask = {
-                id: utils.randomId(),
+        case type.UPSERT_TODO:
+            var task = {
+                id: action.task.id,
                 name: action.task.name,
                 status: action.task.status === 'true' ? true : false
-            };
-            state.push(newTask);
+            }
+            if (task.id) {
+                var index = utils.findIndex(state, task.id);
+                state[index] = task;
+            } else {
+                task.id = utils.randomId();
+                state.push(task)
+            }
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state]
         case type.UPDATE_STATUS:
@@ -29,10 +35,10 @@ var myReducers = (state = initialState, action) => {
             return [...state]
         case type.DELETE_TODO:
             var indexOfDeleted = utils.findIndex(state, action.id);
-            state.splice(indexOfDeleted , 1);
+            state.splice(indexOfDeleted, 1);
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state]
-        default: 
+        default:
             return state
     }
 }

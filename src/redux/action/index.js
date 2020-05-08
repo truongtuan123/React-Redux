@@ -6,9 +6,9 @@ export const getAll = () => {
     }
 }
 
-export const addTodo = (task) => {
+export const upsertTodo = (task) => {
     return {
-        type: type.ADD_TODO,
+        type: type.UPSERT_TODO,
         task
     }
 }
@@ -42,5 +42,12 @@ export const deleteTodo = (id) => {
     return {
         type: type.DELETE_TODO,
         id
+    }
+}
+
+export const updateTask = (task) => {
+    return {
+        type: type.UPDATE_TASK,
+        task
     }
 }

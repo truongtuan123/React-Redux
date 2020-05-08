@@ -22,7 +22,8 @@ class TaskItem extends Component {
     }
 
     onSelectedItem = () => {
-        this.props.onSelectedItem(this.props.task);
+        this.props.onOpenForm();
+        this.props.onUpdateTask(this.props.task)
     }
 
     render() {
@@ -60,6 +61,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onDeleteTodo: (id) => {
             dispatch(action.deleteTodo(id))
+        },
+        onOpenForm: () => {
+            dispatch(action.openForm());
+        },
+        onUpdateTask: (task) => {
+            dispatch(action.updateTask(task))
         }
     }
 }

@@ -112,13 +112,13 @@ class TaskForm extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        itemEditing: state.updateTask
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddTask: (task) => dispatch(action.addTodo(task)),
+        onAddTask: (task) => dispatch(action.upsertTodo(task)),
         onCloseForm: () => dispatch(action.closeForm())
     }
 }
