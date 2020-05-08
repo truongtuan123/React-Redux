@@ -8,14 +8,6 @@ import * as action from './redux/action/index'
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            sortBy: 'name',
-            sortValue: 1
-        };
-    }
-
     componentWillMount() {
         if (localStorage && localStorage.getItem('tasks')) {
             var tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -24,18 +16,6 @@ class App extends Component {
             });
         }
     }
-
-    findIndex = (id) => {
-        var { tasks } = this.state;
-        var result = -1;
-        tasks.forEach((task, index) => {
-            if (task.id === id) {
-                result = index;
-            }
-        });
-        return result;
-    }
-
     // onUpdateStatus = (id) => {
     //     var tasks = this.state.tasks;
     //     var index = this.findIndex(id);
@@ -87,41 +67,9 @@ class App extends Component {
     //     this.onExitForm();
     // }
 
-    onSearch = (keyword) => {
-        this.setState({
-            keyword: keyword
-        });
-    }
-
-    onSort = (sortBy, sortValue) => {
-        this.setState({
-            sortBy: sortBy,
-            sortValue: sortValue
-        })
-    }
-
     render() {
-        var {
-            tasks,
-            sortBy,
-            sortValue
-        } = this.state;
-
         var { isDisplayForm, itemEditing } = this.props;
 
-        if (sortBy === 'name') {
-            tasks.sort((a, b) => {
-                if (a.name > b.name) return sortValue;
-                else if (a.name < b.name) return -sortValue;
-                else return 0;
-            });
-        } else {
-            tasks.sort((a, b) => {
-                if (a.status > b.status) return -sortValue;
-                else if (a.status < b.status) return sortValue;
-                else return 0;
-            });
-        }
         var elmForm = isDisplayForm === true ? <TaskForm
             itemEditing={itemEditing}
         /> : '';
@@ -138,12 +86,7 @@ class App extends Component {
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm} >
                             <span className="fa fa-plus mr-5"></span>Thêm Công Việc
                         </button>
-                        <TaskControl
-                            onSearch={this.onSearch}
-                            onSort={this.onSort}
-                            sortBy={sortBy}
-                            sortValue={sortValue}
-                        />
+                        <TaskControl />
                         <TaskList />
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import form from './form';
 import updateTask from './updateTask';
 import filterTable from './filter';
 import search from './search';
+import sort from './sort';
 
 
 
@@ -12,5 +13,6 @@ export default combineReducers ({
     form,
     updateTask,
     filterTable,
-    search
+    search,
+    sort
 });
